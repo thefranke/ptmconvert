@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ptmconvert by thefranke</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Ptmconvert</h1>
+        <p>A tool to convert Polynomial Texture Maps into regular bitmaps</p>
+
+        <p class="view"><a href="https://github.com/thefranke/ptmconvert">View the Project on GitHub <small>thefranke/ptmconvert</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/thefranke/ptmconvert/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/thefranke/ptmconvert/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/thefranke/ptmconvert">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>
+<a name="introduction" class="anchor" href="#introduction"><span class="octicon octicon-link"></span></a>Introduction</h3>
+
+<p><a href="http://www.hpl.hp.com/research/ptm/papers/ptm.pdf">Polynomial Texture Maps</a> are special texture files which contain biquadratic polynomial coefficients per pixel, modeling the reflectance behavior under varying incident radiance. Even though the format is in heavy use in archeology, I found that the available open-source implementations are rather sparse. The following code is a one-file C++ converter which reads (at the moment) LRGB encoded PTMs (either uncompressed or with JPEG compression) and dumps the luminance coefficients and the RGB data into separate PNG images. These images can be used without the need to write a PTM reader for instance in web applications using WebGL. The neccessary scale and bias parameters are printed on the console.</p>
+
+<p>If you're looking for a simple reader converting all data into regular char arrays, look no further! The code should be simple enough to parse, just have a look at ptm_dump on how to get to the data. A big <strong>Thank You!</strong> to Sean Barrett for <a href="http://nothings.org/">stb_image</a>, which I use to read JPEG compressed data and write PNG files to the disk.</p>
+
+<h3>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h3>
+
+<p><img src="http://thefranke.github.io/ptmconvert/example.jpg" alt="A regular PTM divided into three component images (RGB and 6 luminance coefficients)"></p>
+
+<p>The above image is tablet2.ptm from the HP Research Labs PTM set. Tablet2 is a luminance based PTM, meaning it contains 9 values per pixel, 6 luminance coefficients for the polynomial and 3 color values. It has been converted into three separate images:</p>
+
+<p>a regular RGB image for colors
+an image with coefficients 1, 2 and 3 saved as RGB
+an image with coefficients 4, 5 and 6 saved as RGB
+Together with the bias and scale values, one can use these images with a shader and reconstruct the PTM without the need for a PTM loader.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/thefranke">thefranke</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
