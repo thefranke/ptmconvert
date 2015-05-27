@@ -1,5 +1,9 @@
 project(ptm)
 
-cmake_minimum_required(VERSION 2.6.3 FATAL_ERROR)
+cmake_minimum_required(VERSION 2.8)
 
-add_executable(ptmconvert src/ptmconvert.cpp src/stb/stb_image.h src/stb/stb_image.c)
+if (UNIX)
+    list(APPEND CMAKE_CXX_FLAGS "-stdlib=libc++ -std=c++11")
+endif()
+
+add_executable(ptmconvert src/taf_ptm.h src/stb_image.h src/stb_image_write.h src/ptmconvert.cpp)
