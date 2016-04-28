@@ -1,6 +1,7 @@
-/* 
- * ptmconvert by Tobias Alexander Franke (tobias.franke@siggraph.org) 2012 
+/*
+ * ptmconvert - Tobias Alexander Franke 2012
  * For copyright and license see LICENSE
+ * http://www.tobias-franke.eu
  */
 
 #include <iostream>
@@ -17,18 +18,18 @@
 void ptm_print_info(const taf::PTMHeader12& ptm)
 {
     auto&& log = std::clog;
-    
+
     log << "Width: "  << ptm.width << std::endl;
     log << "Height: " << ptm.height << std::endl;
-    
+
     log << "Scale coefficients: ";
     for (size_t i = 0; i < 6; ++i)
         log << ptm.scale[i] << " ";
-    
+
     log << std::endl << "Bias coefficients: ";
     for (size_t i = 0; i < 6; ++i)
         log << ptm.bias[i] << " ";
-    
+
     log << std::endl;
 }
 
@@ -57,14 +58,14 @@ void ptm_dump_png(const char* filename)
     {
         return stbi_write_png(f, ptmh.width, ptmh.height, 3, data, 0);
     };
-    
+
     if (!write_png("coeff_h.png", &coeff_h[0]) ||
         !write_png("coeff_l.png", &coeff_l[0]) ||
         !write_png("rgb.png",     &rgb[0]))
     {
         throw std::runtime_error("Couldn't write PNG files");
     }
-    
+
     ptm_print_info(ptmh);
 }
 
@@ -74,7 +75,7 @@ int main(int argc, char** argv)
     {
         if (argc < 2)
             throw std::runtime_error("No input file");
-        
+
         ptm_dump_png(argv[1]);
     }
     catch (std::exception& e)
